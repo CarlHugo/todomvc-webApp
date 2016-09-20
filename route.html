@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>route</title>
+
+	<script src="node_modules/angular/angular.js"></script>
+	<script src="node_modules/angular-route/angular-route.js"></script>
+	<script>
+		var app=angular.module('app',['ngRoute']);
+
+		/*配置路由*/
+		app.config(['$routeProvider',function($routeProvider){
+			$routeProvider
+					.when('/a/:name',{controller:'studentsController',templateUrl:'a_tmpl'})
+					.when('/b/:name',{controller:'teachersController',templateUrl:'a_tmpl'})
+					.when('/c/:name',{controller:'othersController',templateUrl:'a_tmpl'})
+					.otherwise({
+						redirectTo:'/a'
+					});
+		}]);
+
+		app.controller('studentsController',['$scope','$routeParams',function($scope,$routeParams){
+			$scope.title="这是"+$routeParams.name+"控制器";
+		}]);
+
+		app.controller('teachersController',['$scope','$routeParams',function($scope,$routeParams){
+			$scope.title="这是"+$routeParams.name+"控制器";
+		}]);
+
+		app.controller('othersController',['$scope','$routeParams',function($scope,$routeParams){
+			$scope.title="这是"+$routeParams.name+"控制器";
+		}]);
+
+	</script>
+
+</head>
+<body ng-app="app">
+
+<script id="a_tmpl" type="text/ng-template">
+	<h1>{{title}}</h1>
+</script>
+
+	<ul>
+		<li><a href="#/a/default_a">A</a></li>
+		<li><a href="#/b/default_b">B</a></li>
+		<li><a href="#/c/default_c">C</a></li>
+	</ul>
+    <div ng-view></div>
+
+</body>
+</html>

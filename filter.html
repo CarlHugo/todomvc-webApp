@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- myself -->
+    <meta charset="UTF-8">
+    <title>filter</title>
+
+	<script src="node_modules/angular/angular.js"></script>
+
+
+	<script>
+		angular.module('app',[]).controller('ListController',['$scope',function($scope){
+			$scope.todos=[
+				{id:0.1,text:'学习',completed:true},
+				{id:0.21,text:'看书',completed:false},
+				{id:0.45,text:'吃饭',completed:true},
+				{id:0.15,text:'运动',completed:false},
+				{id:0.12,text:'睡觉',completed:false}
+			];
+			$scope.search='';
+		}]);
+	</script>
+
+</head>
+<body ng-app="app">
+    <div ng-controller="ListController">
+		<input type="text" ng-model="search">
+		<ul>
+			<li ng-repeat="todo in todos|filter:search">
+				<span>{{todo.id}}</span>
+				<span>{{todo.text}}</span>
+				<span>{{todo.completed}}</span>
+			</li>
+		</ul>
+	</div>
+
+</body>
+</html>

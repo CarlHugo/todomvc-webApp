@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>custom-filter</title>
+	<script src="node_modules/angular/angular.js"></script>
+
+	<script>
+		var module=angular.module('app',[]);
+		module.filter('checkMark',function(){
+			return function(input,style){
+				style=style||1;
+				console.log(1);
+				console.log(2);
+				switch (style){
+					case 1:
+						return input?'\u2713':'\u2718';
+					case 2:
+						return input?'\u2714':'\u2719';
+				}
+			};
+		})
+		.filter('weight',function(){
+			return function(input){
+				if(input>100){
+					return '太重了';
+				}else if(input<80){
+					return '太轻了';
+				}else{
+					return '体重正常';
+				}
+			}
+		});
+
+
+	</script>
+</head>
+<body ng-app="app">
+    <h1>{{true|checkMark:1}}</h1>
+    <h1>{{false|checkMark:2}}</h1>
+
+	<input type="text" placeholder="请输入你的体重！" ng-model="weight">
+    <p>你的体重是:{{weight}}</p>
+
+    <p>{{weight|weight}}</p>
+</body>
+</html>
